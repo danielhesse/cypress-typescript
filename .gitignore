@@ -1,6 +1,8 @@
 # Folders
 node_modules
 dist
+videos
+screenshots
 
 # Files
 yarn.lock
