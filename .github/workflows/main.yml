@@ -26,7 +26,7 @@ jobs:
       - run: npx cypress run
       
       - name: Upload videos
-        uses: actions/upload-artifact@v.2.2.3
+        uses: actions/upload-artifact@v2.2.3
         if: always()
         with:
           name: videos
