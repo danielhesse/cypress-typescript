@@ -1,9 +1,22 @@
 describe('Twitter Clone - Login', () => {
-  it('Login com usuário e senha válidos', () => {
-    cy.visit('https://twitter-clone-example.herokuapp.com/');
+  beforeEach(() => {
+    cy.intercept(
+      {
+        method: 'GET',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        statusCode: 200,
+        fixture: 'download',
+      },
+    ).as('cloudinary');
+  });
 
-    cy.get('input[type=email]').type('johndoe@sharbe.com.br');
-    cy.get('input[type=password]').type('7Q3pKF9VG7cDGkQ');
-    cy.get('button[type=submit]').click();
+  it('should be able to authenticate with valid credentials and be directed to the feed', () => {
+    cy.login();
+
+    cy.visit('/');
+
+    cy.get('nav ul li').should('be.visible').and('have.length', 6);
   });
 });
